@@ -1,258 +1,121 @@
-/* ══ DATA ═══════════════════════════════════════════════ */
-const DATA = {
-  tags: ["Python","JavaScript","HTML/CSS","C++","AI / ML","Full-Stack","IoT","Flask"],
+// === DATA ===
+const skills = [
+  { name: "Python", hot: true }, { name: "JavaScript", hot: true },
+  { name: "HTML/CSS", hot: true }, { name: "C++", hot: false },
+  { name: "Java", hot: false }, { name: "NumPy", hot: false },
+  { name: "Pandas", hot: false }, { name: "Speech Recognition", hot: true },
+  { name: "NLP", hot: true }, { name: "Browser APIs", hot: false },
+  { name: "GitHub", hot: false }, { name: "VS Code", hot: false },
+  { name: "WordPress", hot: false }, { name: "IoT", hot: false },
+];
 
-  skills: {
-    languages:  ["Python","JavaScript","HTML","CSS","C++","Java"],
-    frameworks: ["NumPy","Pandas","Flask","Speech Recognition","NLP","Browser APIs"],
-    tools:      ["GitHub","VS Code","WordPress","Git"],
-    soft:       ["Leadership","Communication","Problem Solving","Team Work"],
+const projects = [
+  {
+    title: "SmartSathi — AI Elderly Care Companion",
+    tech: "HTML · CSS · JavaScript · Browser APIs",
+    desc: "Voice-enabled AI companion for elderly care with health monitoring, emergency assistance, and daily reminders via real-time browser APIs.",
   },
+  {
+    title: "Desktop Voice Assistant",
+    tech: "Python · Speech Recognition · NLP",
+    desc: "Intelligent desktop assistant performing tasks via voice commands — web search, system operations — with accurate voice-to-action NLP processing.",
+  },
+  {
+    title: "Smart Rainwater Harvesting System",
+    tech: "IoT · Python · Sensors",
+    desc: "IoT-integrated solution automating water collection and promoting sustainable practices with real-time sensor-based level monitoring.",
+  },
+  {
+    title: "Hospital Management System",
+    tech: "Python · HTML/CSS · JavaScript",
+    desc: "Full-stack app streamlining patient records, appointments, and administrative workflows with a role-based dashboard interface.",
+  },
+  {
+    title: "Event Management System",
+    tech: "HTML · CSS · JavaScript · Python",
+    desc: "Platform enabling seamless planning, scheduling, and coordination of events with attendee registration and real-time organizer updates.",
+  },
+];
 
-  proficiency: [
-    { label:"Python",        pct:85 },
-    { label:"JavaScript",    pct:80 },
-    { label:"HTML / CSS",    pct:90 },
-    { label:"C++",           pct:65 },
-    { label:"Flask / NLP",   pct:70 },
-  ],
+const certs = [
+  "IT Fundamentals — Udemy",
+  "30 Days DSA Bootcamp — Unstop",
+  "AI for Beginners — HP",
+  "Data Science & Analytics — HP",
+  "Intro to Generative AI — AWS",
+  "Cybersecurity Analyst Simulation — Tata / Forage",
+];
 
-  projects: [
-    {
-      title:"SmartSathi — AI Elderly Care Companion",
-      tech:"HTML · CSS · JavaScript · Browser APIs",
-      desc:"Voice-enabled AI companion for elderly care with health monitoring, emergency assistance, and daily reminders via real-time browser APIs.",
-      tags:["AI","JavaScript","Web"],
-      cat:"AI",
-    },
-    {
-      title:"Desktop Voice Assistant",
-      tech:"Python · Speech Recognition · NLP",
-      desc:"Intelligent desktop assistant performing voice-commanded tasks — web search, system operations — with accurate NLP voice-to-action processing.",
-      tags:["Python","AI","NLP"],
-      cat:"AI",
-    },
-    {
-      title:"Smart Rainwater Harvesting System",
-      tech:"IoT · Python · Sensors",
-      desc:"IoT-integrated solution automating water collection and promoting sustainable practices with sensor-based real-time monitoring.",
-      tags:["IoT","Python","Hardware"],
-      cat:"IoT",
-    },
-    {
-      title:"Hospital Management System",
-      tech:"Python · HTML · CSS · JavaScript · SQL",
-      desc:"Full-stack app to streamline patient records, appointments, and admin workflows with a role-based dashboard and secure access.",
-      tags:["Full-Stack","Python","SQL"],
-      cat:"Web",
-    },
-    {
-      title:"Event Management System",
-      tech:"Python · CSS · HTML · JavaScript · Flask",
-      desc:"Platform for seamless event planning, scheduling, and coordination with attendee registration and real-time organizer updates.",
-      tags:["Full-Stack","Flask","Web"],
-      cat:"Web",
-    },
-  ],
+// === CURSOR ===
+const cursor = document.querySelector(".cursor");
+const trail = document.querySelector(".cursor-trail");
+let mx = 0, my = 0, tx = 0, ty = 0;
 
-  certs: [
-    "IT Fundamentals — Udemy",
-    "30 Days DSA Bootcamp — Unstop",
-    "AI for Beginners — HP",
-    "Data Science & Analytics — HP",
-    "Intro to Generative AI — AWS",
-    "Cybersecurity Analyst Simulation — Tata / Forage",
-  ],
-};
-
-/* ══ CURSOR ═════════════════════════════════════════════ */
-const cur = document.getElementById("cursor");
-const ring = document.getElementById("cursor-ring");
-let mx=0,my=0,rx=0,ry=0;
-
-document.addEventListener("mousemove", e => {
+document.addEventListener("mousemove", (e) => {
   mx = e.clientX; my = e.clientY;
-  cur.style.left = mx+"px"; cur.style.top = my+"px";
-});
-(function animRing(){
-  rx += (mx-rx)*.13; ry += (my-ry)*.13;
-  ring.style.left = rx+"px"; ring.style.top = ry+"px";
-  requestAnimationFrame(animRing);
-})();
-
-/* ══ NAV SCROLL ═════════════════════════════════════════ */
-const nav = document.getElementById("nav");
-window.addEventListener("scroll", () => {
-  nav.classList.toggle("scrolled", window.scrollY > 50);
-
-  // Active nav link
-  document.querySelectorAll("section[id]").forEach(sec => {
-    const link = document.querySelector(`.nav-links a[href="#${sec.id}"]`);
-    if (!link) return;
-    const { top, bottom } = sec.getBoundingClientRect();
-    link.style.color = top < 100 && bottom > 100 ? "var(--text)" : "";
-  });
+  cursor.style.left = mx + "px";
+  cursor.style.top = my + "px";
 });
 
-/* ══ HAMBURGER ══════════════════════════════════════════ */
-const hamburger = document.getElementById("hamburger");
-const mobileMenu = document.getElementById("mobile-menu");
-hamburger.addEventListener("click", () => mobileMenu.classList.toggle("open"));
-mobileMenu.querySelectorAll("a").forEach(a => a.addEventListener("click", () => mobileMenu.classList.remove("open")));
-
-/* ══ RESUME DOWNLOAD ════════════════════════════════════ */
-function downloadResume() {
-  // Try backend first, fallback to direct link
-  const link = document.createElement("a");
-  link.href = "http://localhost:3000/api/resume";
-  link.download = "Aakash_Yadav_Resume.pdf";
-  link.click();
+function animTrail() {
+  tx += (mx - tx) * 0.12;
+  ty += (my - ty) * 0.12;
+  trail.style.left = tx + "px";
+  trail.style.top = ty + "px";
+  requestAnimationFrame(animTrail);
 }
+animTrail();
 
-document.getElementById("download-btn").addEventListener("click", downloadResume);
-const mobileResume = document.getElementById("mobile-resume");
-if (mobileResume) mobileResume.addEventListener("click", e => { e.preventDefault(); downloadResume(); });
-
-/* ══ HERO TAGS ══════════════════════════════════════════ */
-const htContainer = document.getElementById("hero-tags");
-DATA.tags.forEach((t,i) => {
-  const s = document.createElement("span");
-  s.className = "tag reveal"; s.textContent = t;
-  s.style.animationDelay = (.4 + i*.05)+"s";
-  htContainer.appendChild(s);
+// Big on hover
+document.querySelectorAll("a, button, .btn, .project-card, .skill-tag").forEach(el => {
+  el.addEventListener("mouseenter", () => cursor.style.transform = "translate(-50%,-50%) scale(2.5)");
+  el.addEventListener("mouseleave", () => cursor.style.transform = "translate(-50%,-50%) scale(1)");
 });
 
-/* ══ COUNTER ANIMATION ══════════════════════════════════ */
-function animateCount(el, target) {
-  let start = 0;
-  const step = target / 40;
-  const timer = setInterval(() => {
-    start += step;
-    if (start >= target) { el.textContent = target; clearInterval(timer); return; }
-    el.textContent = Math.floor(start);
-  }, 40);
-}
+// === RENDER SKILLS ===
+const sg = document.getElementById("skills-grid");
+skills.forEach(s => {
+  const span = document.createElement("span");
+  span.className = "skill-tag" + (s.hot ? " hot" : "");
+  span.textContent = s.name;
+  sg.appendChild(span);
+});
 
-const counters = document.querySelectorAll(".stat-num[data-target]");
-const counterObserver = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      animateCount(e.target, +e.target.dataset.target);
-      counterObserver.unobserve(e.target);
-    }
-  });
-}, { threshold: .5 });
-counters.forEach(c => counterObserver.observe(c));
-
-/* ══ SKILLS ═════════════════════════════════════════════ */
-const tabsEl = document.getElementById("skill-tabs");
-const tagsEl = document.getElementById("skill-tags");
-let activeTab = "languages";
-
-function renderTabs() {
-  tabsEl.innerHTML = "";
-  Object.keys(DATA.skills).forEach(cat => {
-    const btn = document.createElement("button");
-    btn.className = "tab-btn" + (cat === activeTab ? " active" : "");
-    btn.textContent = cat.charAt(0).toUpperCase() + cat.slice(1);
-    btn.dataset.tab = cat;
-    btn.addEventListener("click", () => { activeTab = cat; renderTabs(); renderTags(); });
-    tabsEl.appendChild(btn);
-  });
-}
-
-function renderTags() {
-  tagsEl.innerHTML = "";
-  DATA.skills[activeTab].forEach((s,i) => {
-    const span = document.createElement("span");
-    span.className = "s-tag fade-in";
-    span.textContent = s;
-    span.style.transitionDelay = (i*.05)+"s";
-    tagsEl.appendChild(span);
-    requestAnimationFrame(() => span.classList.add("visible"));
-  });
-}
-
-renderTabs(); renderTags();
-
-// Proficiency bars
-const barsEl = document.getElementById("prof-bars");
-DATA.proficiency.forEach(p => {
-  barsEl.innerHTML += `
-    <div class="prof-bar fade-in">
-      <div class="prof-label"><span>${p.label}</span><span>${p.pct}%</span></div>
-      <div class="prof-track"><div class="prof-fill" data-pct="${p.pct}"></div></div>
+// === RENDER PROJECTS ===
+const pg = document.getElementById("projects-grid");
+projects.forEach((p, i) => {
+  pg.innerHTML += `
+    <div class="project-card" style="animation-delay:${i * 0.07}s">
+      <div class="project-num">${String(i + 1).padStart(2, "0")} /</div>
+      <h3>${p.title}</h3>
+      <div class="project-tech">${p.tech}</div>
+      <p>${p.desc}</p>
+      <div class="project-links">
+        <a href="#" class="project-link">→ View Project</a>
+        <a href="#" class="project-link">↗ GitHub</a>
+      </div>
     </div>`;
 });
 
-const barObserver = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.querySelectorAll(".prof-fill").forEach(f => {
-        f.style.width = f.dataset.pct + "%";
-      });
-      barObserver.unobserve(e.target);
-    }
-  });
-}, { threshold: .2 });
-document.querySelectorAll(".prof-bar").forEach(b => barObserver.observe(b));
-
-/* ══ PROJECTS ═══════════════════════════════════════════ */
-const allCats = ["All", ...new Set(DATA.projects.map(p => p.cat))];
-const filterEl = document.getElementById("proj-filters");
-const gridEl   = document.getElementById("proj-grid");
-let activeFilter = "All";
-
-function renderFilters() {
-  filterEl.innerHTML = "";
-  allCats.forEach(cat => {
-    const btn = document.createElement("button");
-    btn.className = "filter-btn" + (cat === activeFilter ? " active" : "");
-    btn.textContent = cat;
-    btn.addEventListener("click", () => { activeFilter = cat; renderFilters(); renderProjects(); });
-    filterEl.appendChild(btn);
-  });
-}
-
-function renderProjects() {
-  const filtered = activeFilter === "All" ? DATA.projects : DATA.projects.filter(p => p.cat === activeFilter);
-  gridEl.innerHTML = "";
-  filtered.forEach((p, i) => {
-    const card = document.createElement("div");
-    card.className = "proj-card fade-in";
-    card.style.transitionDelay = (i * .08) + "s";
-    card.innerHTML = `
-      <div class="proj-num">${String(i+1).padStart(2,"0")} /</div>
-      <h3>${p.title}</h3>
-      <div class="proj-tech">${p.tech}</div>
-      <p class="proj-desc">${p.desc}</p>
-      <div class="proj-tags">${p.tags.map(t=>`<span class="proj-tag">${t}</span>`).join("")}</div>`;
-    gridEl.appendChild(card);
-    requestAnimationFrame(() => card.classList.add("visible"));
-  });
-}
-
-renderFilters(); renderProjects();
-
-/* ══ CERTIFICATIONS ═════════════════════════════════════ */
-const certGrid = document.getElementById("cert-grid");
-DATA.certs.forEach(c => {
-  certGrid.innerHTML += `<span class="cert-badge">🏅 ${c}</span>`;
+// === RENDER CERTS ===
+const cg = document.getElementById("certs-grid");
+certs.forEach(c => {
+  cg.innerHTML += `<span class="cert-badge">🏅 ${c}</span>`;
 });
 
-/* ══ CONTACT FORM ════════════════════════════════════════ */
-const form   = document.getElementById("contact-form");
+// === CONTACT FORM ===
+const form = document.getElementById("contact-form");
 const status = document.getElementById("form-status");
 
-form.addEventListener("submit", async e => {
+form.addEventListener("submit", async (e) => {
   e.preventDefault();
   const btn = document.getElementById("submit-btn");
-  btn.textContent = "Sending…";
+  btn.textContent = "Sending...";
   btn.disabled = true;
 
-  const payload = {
-    name:    form.name.value,
-    email:   form.email.value,
+  const data = {
+    name: form.name.value,
+    email: form.email.value,
     subject: form.subject.value,
     message: form.message.value,
   };
@@ -261,37 +124,63 @@ form.addEventListener("submit", async e => {
     const res = await fetch("http://localhost:3000/api/contact", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
+      body: JSON.stringify(data),
     });
-    const data = await res.json();
-    if (data.success) {
-      status.textContent = "✓ Message sent! I'll reply soon.";
-      status.className = "form-status ok";
+    const result = await res.json();
+    if (result.success) {
+      status.textContent = "✓ Message sent! I'll get back to you soon.";
+      status.className = "form-status success";
       form.reset();
-    } else throw new Error();
+    } else {
+      throw new Error(result.message);
+    }
   } catch {
-    status.textContent = "✓ Demo mode — connect backend to enable real sending.";
-    status.className = "form-status ok";
+    // Demo fallback when backend not running
+    status.textContent = "✓ Demo: Message received! (Connect backend to enable real sending)";
+    status.className = "form-status success";
     form.reset();
   }
+
   btn.textContent = "Send Message →";
   btn.disabled = false;
   setTimeout(() => (status.textContent = ""), 5000);
 });
 
-/* ══ SCROLL REVEAL ══════════════════════════════════════ */
-const revealObserver = new IntersectionObserver(entries => {
+// === SCROLL REVEAL ===
+const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add("visible");
-      revealObserver.unobserve(e.target);
-    }
+    if (e.isIntersecting) e.target.classList.add("visible");
   });
-}, { threshold: .12 });
+}, { threshold: 0.1 });
 
-document.querySelectorAll(
-  ".t-card, .cert-badge, .proj-card, .c-link, .info-item, .pill, .prof-bar, .stat-card, .about-left p"
-).forEach(el => {
-  el.classList.add("fade-in");
-  revealObserver.observe(el);
+document.querySelectorAll(".project-card, .skill-tag, .timeline-item, .cert-badge").forEach(el => {
+  el.style.opacity = "0";
+  el.style.transform = "translateY(20px)";
+  el.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+  observer.observe(el);
+});
+
+// Visible state triggered by IntersectionObserver
+const style = document.createElement("style");
+style.textContent = `.visible { opacity: 1 !important; transform: translateY(0) !important; }`;
+document.head.appendChild(style);
+
+// === RESUME DOWNLOAD ===
+document.getElementById("resume-btn").addEventListener("click", (e) => {
+  e.preventDefault();
+  // Redirect to backend endpoint for resume download
+  window.open("http://localhost:3000/api/resume", "_blank");
+});
+
+// === NAV ACTIVE STATE ===
+window.addEventListener("scroll", () => {
+  const sections = document.querySelectorAll("section[id]");
+  const links = document.querySelectorAll(".nav-links a");
+  let current = "";
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 120) current = s.id;
+  });
+  links.forEach(l => {
+    l.style.color = l.getAttribute("href") === `#${current}` ? "var(--text)" : "";
+  });
 });
