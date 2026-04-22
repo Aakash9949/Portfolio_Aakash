@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Aakash Yadav — Developer</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet"/>
+</head>
+<body>
+  <!-- Cursor -->
+  <div class="cursor"></div>
+  <div class="cursor-trail"></div>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="nav-logo">AY<span class="dot">.</span></div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-status"><span class="pulse"></span> Open to Work</div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div class="hero-bg-text">DEV</div>
+    <div class="hero-content">
+      <p class="hero-tag">// B.Tech CSE · KR Mangalam University</p>
+      <h1 class="hero-name">
+        <span class="line" data-text="Aakash">Aakash</span>
+        <span class="line accent" data-text="Yadav.">Yadav.</span>
+      </h1>
+      <p class="hero-desc">Full-Stack Developer & AI Enthusiast<br/>building voice-first interfaces &amp; intelligent tools.</p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-primary">View Projects</a>
+        <a href="../backend/resume-download" class="btn btn-outline" id="resume-btn">Download Resume</a>
+      </div>
+    </div>
+    <div class="hero-scroll">SCROLL ↓</div>
+  </section>
+
+  <!-- About -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="section-label">01 / About</div>
+      <div class="about-grid">
+        <div class="about-left">
+          <h2 class="section-title">Who <em>I</em> am</h2>
+          <p>Motivated CS student with a strong foundation in software development and full-stack web technologies. I build voice-enabled AI apps, desktop tools, and management systems that solve real-world problems.</p>
+          <p>Experienced in Python, JavaScript, C++, with a sharp eye for clean code and meaningful UX.</p>
+          <div class="about-meta">
+            <div class="meta-item"><span>📍</span>Bhiwadi, Rajasthan</div>
+            <div class="meta-item"><span>🎓</span>B.Tech CSE, 2024–2028</div>
+            <div class="meta-item"><span>📧</span>aakashyd09@gmail.com</div>
+          </div>
+        </div>
+        <div class="about-right">
+          <div class="avatar-box">
+            <div class="avatar-initials">AY</div>
+            <div class="avatar-ring"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section class="section section-dark" id="skills">
+    <div class="container">
+      <div class="section-label">02 / Skills</div>
+      <h2 class="section-title">Tech <em>Stack</em></h2>
+      <div class="skills-grid" id="skills-grid">
+        <!-- populated by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section class="section" id="projects">
+    <div class="container">
+      <div class="section-label">03 / Projects</div>
+      <h2 class="section-title">What I've <em>Built</em></h2>
+      <div class="projects-grid" id="projects-grid">
+        <!-- populated by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section class="section section-dark" id="experience">
+    <div class="container">
+      <div class="section-label">04 / Experience</div>
+      <h2 class="section-title">Work &amp; <em>Certifications</em></h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <h3>Software Developer Intern</h3>
+            <span class="timeline-company">Prodigy Infotech</span>
+            <p>Gained hands-on experience in real-world development workflows, production-level coding standards, and collaborative engineering across multiple projects.</p>
+          </div>
+        </div>
+      </div>
+      <div class="certs-grid" id="certs-grid"><!-- populated by JS --></div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="section-label">05 / Contact</div>
+      <h2 class="section-title">Let's <em>Connect</em></h2>
+      <div class="contact-wrapper">
+        <form class="contact-form" id="contact-form">
+          <div class="form-row">
+            <input type="text" name="name" placeholder="Your Name" required />
+            <input type="email" name="email" placeholder="Your Email" required />
+          </div>
+          <input type="text" name="subject" placeholder="Subject" />
+          <textarea name="message" placeholder="Your Message..." rows="5" required></textarea>
+          <button type="submit" class="btn btn-primary" id="submit-btn">Send Message →</button>
+          <div class="form-status" id="form-status"></div>
+        </form>
+        <div class="contact-info">
+          <a href="mailto:aakashyd09@gmail.com" class="contact-link">📧 aakashyd09@gmail.com</a>
+          <a href="tel:+919256617455" class="contact-link">📞 +91-9256617455</a>
+          <a href="https://linkedin.com/in/aakash-yadav" target="_blank" class="contact-link">💼 LinkedIn</a>
+          <a href="https://github.com" target="_blank" class="contact-link">🐙 GitHub</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <span>Aakash Yadav © 2024</span>
+      <span>Built with HTML · CSS · JS · Node.js</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
