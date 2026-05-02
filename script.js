@@ -129,10 +129,16 @@ DATA.tags.forEach((t,i) => {
   htContainer.appendChild(s);
 });
 
+/* ══ DYNAMIC STAT COUNTS (auto from DATA) ═══════════════ */
+// Set data-target from actual array lengths — adding a project/cert
+// automatically updates the hero counter. No hardcoding needed.
+document.getElementById("stat-projects").dataset.target = DATA.projects.length;
+document.getElementById("stat-certs").dataset.target    = DATA.certs.length;
+
 /* ══ COUNTER ANIMATION ══════════════════════════════════ */
 function animateCount(el, target) {
   let start = 0;
-  const step = target / 40;
+  const step = Math.max(target / 40, 0.5);
   const timer = setInterval(() => {
     start += step;
     if (start >= target) { el.textContent = target; clearInterval(timer); return; }
@@ -279,34 +285,41 @@ form.addEventListener("submit", async e => {
   const btn = document.getElementById("submit-btn");
   btn.textContent = "Sending…";
   btn.disabled = true;
+  status.textContent = "";
+  status.className = "form-status";
 
   const payload = {
-    name:    form.name.value,
-    email:   form.email.value,
-    subject: form.subject.value,
-    message: form.message.value,
+    name:    form.name.value.trim(),
+    email:   form.email.value.trim(),
+    subject: form.subject.value.trim(),
+    message: form.message.value.trim(),
   };
 
   try {
-    const res = await fetch("http://localhost:3000/api/contact", {
+    const res = await fetch("/api/contact", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
     });
+
     const data = await res.json();
-    if (data.success) {
-      status.textContent = "✓ Message sent! I'll reply soon.";
+
+    if (res.ok && data.success) {
+      status.textContent = "✓ " + data.message;
       status.className = "form-status ok";
       form.reset();
-    } else throw new Error();
+    } else {
+      status.textContent = "✗ " + (data.message || "Something went wrong. Please try again.");
+      status.className = "form-status err";
+    }
   } catch {
-    status.textContent = "✓ Demo mode — connect backend to enable real sending.";
-    status.className = "form-status ok";
-    form.reset();
+    status.textContent = "✗ Could not reach the server. Please email me directly at aakashyd09@gmail.com";
+    status.className = "form-status err";
   }
+
   btn.textContent = "Send Message →";
   btn.disabled = false;
-  setTimeout(() => (status.textContent = ""), 5000);
+  setTimeout(() => { status.textContent = ""; status.className = "form-status"; }, 6000);
 });
 
 /* ══ SCROLL REVEAL ══════════════════════════════════════ */
